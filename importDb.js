@@ -23,17 +23,14 @@ db.once("open", async () => {
     // Insert data into MongoDB
     const insertedEquipment = await Equipment.insertMany(jsonData.equipment);
     console.log("Equipment Data imported successfully");
-    // Create a mapping of old string IDs to new ObjectIds
-    const equipmentMap = new Map();
-    insertedEquipment.forEach((eq) => {
-      equipmentMap.set(eq.id, eq._id); // Map old string ID to new MongoDB ObjectId
-    });
-
+    // test relationship
+    let record = jsonData.maintenance[3];
+    console.log(insertedEquipment[+record.equipmentId - 1]._id);
+    console.log(insertedEquipment[+record.equipmentId - 1]);
     // Convert equipmentId in maintenance records
     const maintenanceData = jsonData.maintenance.map((record) => ({
       ...record,
-      equipmentId:
-        equipmentMap.get(record.equipmentId) || new mongoose.Types.ObjectId(), // Convert to ObjectId
+      equipmentId: insertedEquipment[+record.equipmentId - 1]._id,
     }));
     await Maintenance.insertMany(maintenanceData);
     console.log("Maintenance Data imported successfully");
