@@ -60,14 +60,20 @@ This is a RESTful API for managing equipment and maintenance records, built with
    cd equipment-maintenance-system
    ```
 2. Install dependencies:
+   ```bash
    npm install
+   ```
 
-3. Create a .env file in the root directory with the following content:
+4. Create a `.env` file in the root directory with the following content:
+   ```bash
    MONGODB_URI=your_mongodb_connection_string
    PORT=4000
+    ```
 
-4. Start the development server:
+6. Start the development server:
+   ```bash
    npm run dev
+   ```
 
 # Contact
 
