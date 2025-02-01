@@ -1,0 +1,21 @@
+{
+  "name": "maintenance_system_server",
+  "version": "1.0.0",
+  "description": "a server that provide CRUD operations for maintenance tracking system frontend application",
+  "license": "ISC",
+  "author": "mohamed saleh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
+  }
+}
