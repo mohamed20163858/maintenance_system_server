@@ -5,7 +5,7 @@ const Maintenance = require("../models/Maintenance");
 // Get all maintenance records
 router.get("/", async (req, res) => {
   try {
-    const maintenance = await Maintenance.find().populate("equipmentId");
+    const maintenance = await Maintenance.find();
     res.json(maintenance);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   const maintenance = new Maintenance(req.body);
   try {
     const newMaintenance = await maintenance.save();
-    res.status(201).json(await newMaintenance.populate("equipmentId"));
+    res.status(201).json(await newMaintenance);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -33,7 +33,7 @@ router.put("/:id", getMaintenance, async (req, res) => {
   try {
     Object.assign(res.maintenance, req.body);
     const updatedMaintenance = await res.maintenance.save();
-    res.json(await updatedMaintenance.populate("equipmentId"));
+    res.json(await updatedMaintenance);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -52,9 +52,7 @@ router.delete("/:id", getMaintenance, async (req, res) => {
 // Middleware to get maintenance by ID
 async function getMaintenance(req, res, next) {
   try {
-    const maintenance = await Maintenance.findById(req.params.id).populate(
-      "equipmentId"
-    );
+    const maintenance = await Maintenance.findById(req.params.id);
     if (!maintenance) {
       return res.status(404).json({ message: "Maintenance record not found" });
     }
